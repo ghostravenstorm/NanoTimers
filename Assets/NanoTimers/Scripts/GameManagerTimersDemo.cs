@@ -1,73 +1,92 @@
+// Program: Nano Timers
+// Author:  GhostRavenstorm
+// Date:    2017-08-09
+// Version: 0.1.2beta
+//
+// Summary: Timer library that includes countdown timers and stopwatches.
+
 using UnityEngine;
 using UnityEngine.UI;
 
 using NanoTimers;
 
+// Demo script that show how to use timers.
+
 public class GameManagerTimersDemo : MonoBehaviour{
 
-	public Text countdownTimerText;
-	public Text stopwatchText;
-	public Toggle toggle;
+	public Text m_countdownTimerText;
+	public Text m_stopwatchText;
+	public Toggle m_toggle;
 
-	private CountdownTimer countdownTimer;
-	private Stopwatch stopwatch;
+	private CountdownTimer m_countdownTimer;
+	private Stopwatch m_stopwatch;
 
 	private void Start(){
-		this.countdownTimer = this.gameObject.AddComponent<CountdownTimer>();
-		this.countdownTimer.Initialize(3, 0, 0, countdownTimerText, this.OnTimerExpired);
-		//this.countdownTimer.StartTimer();
+		// Create the timer object using AddComponent
+		m_countdownTimer = gameObject.AddComponent<CountdownTimer>();
 
-		this.stopwatch = this.gameObject.AddComponent<Stopwatch>();
-		this.stopwatch.Initialize(stopwatchText);
-		//this.stopwatch.StartTimer();
+		// Call the initializer that sets the time, gives a reference to a text element,
+		// and passes in a method to call when timer has expired.
+		m_countdownTimer.Initialize(new NanoTimers.Time(3, 0, 0), m_countdownTimerText, OnTimerExpired);
+
+		m_stopwatch = gameObject.AddComponent<Stopwatch>();
+		m_stopwatch.Initialize(m_stopwatchText);
 	}
 
+	// Methods that executes when the timer's expired event is called.
 	private void OnTimerExpired(){
 		Debug.Log("Timer expired.");
 	}
 
+	// ** Demo Button Functions **
+
 	public void StartCountdownTimer(){
-		this.countdownTimer.StartTimer();
+		m_countdownTimer.StartTimer();
 	}
 
 	public void PauseCountdownTimer(){
-		this.countdownTimer.Pause();
+		m_countdownTimer.Pause();
 	}
 
 	public void ResetCountdownTimer(){
-		this.countdownTimer.Reset();
+		m_countdownTimer.Reset();
 	}
 
 	public void PauseCountdownTimer3Seconds(){
-		this.countdownTimer.PauseForSeconds(3, 0);
+
+		// Calls the timed pause method and sets it to 3 seconds and 0 milliseconds.
+		m_countdownTimer.PauseForSeconds(3, 0);
 	}
 
 	public void Add30Seconds(){
-		this.countdownTimer.AddTime(0, 30);
+
+		// Adds 30 seconds using a struct initialized to 0 minutes, 30 seconds, and 0 milliseconds.
+		m_countdownTimer.AddTime(new NanoTimers.Time(0, 30, 0));
 	}
 
 	public void Sub30Seconds(){
-		this.countdownTimer.SubTime(0, 30);
+
+		// Substracts 30 seconds using a struct initialized to 0 minutes, 30 seconds, and 0 milliseconds.
+		m_countdownTimer.SubTime(new NanoTimers.Time(0, 30, 0));
 	}
 
 	public void OnShowMillis(bool isOn){
-		Debug.Log(isOn);
-		this.countdownTimer.SetShowMillis(this.toggle.isOn);
+		m_countdownTimer.SetShowMillis(m_toggle.isOn);
 	}
 
 	public void StartStopwatch(){
-		this.stopwatch.StartTimer();
+		m_stopwatch.StartTimer();
 	}
 
 	public void PauseStopwatch(){
-		this.stopwatch.Pause();
+		m_stopwatch.Pause();
 	}
 
 	public void ResetStopwatch(){
-		this.stopwatch.Reset();
+		m_stopwatch.Reset();
 	}
 
 	public void PauseStopwatch3Seconds(){
-		this.stopwatch.PauseForSeconds(3, 0);
+		m_stopwatch.PauseForSeconds(3, 0);
 	}
 }
