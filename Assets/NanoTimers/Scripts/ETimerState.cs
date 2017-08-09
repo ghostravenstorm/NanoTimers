@@ -1,6 +1,7 @@
 // Program: Nano Timers
 // Author:  GhostRavenstorm
-// Date:    2017-05-14
+// Date:    2017-08-09
+// Version: 0.1.2beta
 //
 // Summary: Timer library that includes countdown timers and stopwatches.
 
