@@ -1,7 +1,6 @@
 // Program: Nano Timers
 // Author:  GhostRavenstorm
-// Date:    2017-08-09
-// Version: 0.1.2beta
+// Version: 0.1.3
 //
 // Summary: Timer library that includes countdown timers and stopwatches.
 
@@ -26,7 +25,7 @@ public class CountdownTimer : Timer{
 	//
 	// Remarks:
 	// null can be passed for timerText if no GUI is desired.
-	public void Initialize(NanoTimers.Time time, Text timerText, Action callback){
+	public void Initialize(NanoTimers.Time time, Text timerText, Action callback, bool debug){
 		m_minutes                 = time.minutes;
 		m_seconds                 = time.seconds;
 		m_millis                  = time.millis;
@@ -37,7 +36,13 @@ public class CountdownTimer : Timer{
 		m_timerText               = timerText;
 		m_callback                = callback;
 		m_isInitialized           = true;
+		m_debug                   = debug;
 		UpdateUI();
+
+		if(m_debug){
+			if(!m_timerText) Debug.LogWarning(this + " has no GUI to display timer.");
+			if(m_callback == null) Debug.LogWarning(this + " has no ref to a callback method.");
+		}
 	}
 
 	void FixedUpdate(){

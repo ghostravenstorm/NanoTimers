@@ -1,7 +1,6 @@
 // Program: Nano Timers
 // Author:  GhostRavenstorm
-// Date:    2017-08-09
-// Version: 0.1.2beta
+// Version: 0.1.3
 //
 // Summary: Timer library that includes countdown timers and stopwatches.
 
@@ -12,7 +11,7 @@ using NanoTimers;
 
 // Demo script that show how to use timers.
 
-public class GameManagerTimersDemo : MonoBehaviour{
+public class TimerTestBench : MonoBehaviour{
 
 	public Text m_countdownTimerText;
 	public Text m_stopwatchText;
@@ -27,7 +26,7 @@ public class GameManagerTimersDemo : MonoBehaviour{
 
 		// Call the initializer that sets the time, gives a reference to a text element,
 		// and passes in a method to call when timer has expired.
-		m_countdownTimer.Initialize(new NanoTimers.Time(3, 0, 0), m_countdownTimerText, OnTimerExpired);
+		m_countdownTimer.Initialize(new NanoTimers.Time(3, 0, 0), m_countdownTimerText, OnTimerExpired, true);
 
 		m_stopwatch = gameObject.AddComponent<Stopwatch>();
 		m_stopwatch.Initialize(m_stopwatchText);

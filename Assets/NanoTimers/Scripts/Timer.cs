@@ -1,7 +1,6 @@
 // Program: Nano Timers
 // Author:  GhostRavenstorm
-// Date:    2017-08-09
-// Version: 0.1.2beta
+// Version: 0.1.3
 //
 // Summary: Timer library that includes countdown timers and stopwatches.
 
@@ -54,6 +53,10 @@ public abstract class Timer : MonoBehaviour {
 	// Determines if this timer has been properly initialized and prevent it from
 	// being started with null values.
 	protected bool m_isInitialized;
+
+   // Prints warnings and errors to console.
+   [SerializeField]
+   protected bool m_debug;
 
    // SUMMARY:
    // Returns the timer's current state.
@@ -121,7 +124,7 @@ public abstract class Timer : MonoBehaviour {
 
 		if(m_pausedTimer == null){
 			m_pausedTimer = gameObject.AddComponent<CountdownTimer>();
-			m_pausedTimer.Initialize(new NanoTimers.Time(0, seconds, millis), null, StartTimer);
+			m_pausedTimer.Initialize(new NanoTimers.Time(0, seconds, millis), null, StartTimer, false);
 			m_pausedTimer.StartTimer();
 		}
 		else{
